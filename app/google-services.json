@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "108471737899",
+    "firebase_url": "https://waittime-86e1e.firebaseio.com",
+    "project_id": "waittime-86e1e",
+    "storage_bucket": "waittime-86e1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108471737899:android:063e9038af94e2fb",
+        "android_client_info": {
+          "package_name": "me.kevinkang.waittime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "108471737899-9el16bpjs8qmnn1kp53kgqo78q0vit0j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.kevinkang.waittime",
+            "certificate_hash": "FF8B1D6DF865759EB6F2C2AABC65E50200A2318A"
+          }
+        },
+        {
+          "client_id": "108471737899-8tkrpa7riqjig5f8epq3crgbhs0843mi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu7--bmjL6tuQ8EB-LCrLIF2vkootsSNM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "108471737899-8tkrpa7riqjig5f8epq3crgbhs0843mi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
