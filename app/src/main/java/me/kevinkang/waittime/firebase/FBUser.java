@@ -1,6 +1,14 @@
 package me.kevinkang.waittime.firebase;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 import me.kevinkang.waittime.model.User;
+
+import static android.R.attr.id;
 
 /**
  * Created by kevink97 on 1/14/17.
@@ -9,15 +17,15 @@ import me.kevinkang.waittime.model.User;
 public class FBUser implements User {
     private int maxWaitTime;
     private final String UID;
-    private int DEFAULT_WAIT_TIME = 20; // in minutes
+    private static int DEFAULT_WAIT_TIME = 20; // in minutes
+    private DatabaseReference db;
 
     /**
      * Initializes FBUser with its unique ID
      * @param UID unique ID for user generated from Firebase
      */
     public FBUser(String UID) {
-        this.UID = UID;
-        this.maxWaitTime = DEFAULT_WAIT_TIME;
+        this(UID, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -26,8 +34,28 @@ public class FBUser implements User {
      * @param maxWaitTime the max wait time the user wants
      */
     public FBUser(String UID, int maxWaitTime) {
-        this.UID = UID;
         this.maxWaitTime = maxWaitTime;
+        db = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            this.UID = user.getUid();
+        } else {
+            this.UID = "DEFAULT";
+        }
+
+        // add user to firebase if they are new
+        if (db.child("users").child(UID) == null) {
+            db.child("users").child(UID).setValue(id);
+            db.child("users").child(UID).child("max-time").setValue(this.maxWaitTime);
+        }
+
+    }
+
+    public FBUser retrieveUser(String UID) {
+        if (db.child("users").child(UID) == null) return null;
+        FBUser user = new FBUser(UID);
+        Query query = db.child("users").child(UID)
+        return new FBUser(UID);
     }
 
     /**
