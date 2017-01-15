@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                    startActivity(new Intent());
+                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
                 }
                 // ...
             }

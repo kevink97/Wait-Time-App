@@ -1,5 +1,12 @@
 package me.kevinkang.waittime.firebase;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import me.kevinkang.waittime.model.Restaurant;
 
 /**
@@ -13,6 +20,8 @@ public class FBRestaurant implements Restaurant {
     private double rating;
     private String name;
 
+    private DatabaseReference db;
+
     /**
      * Sets FBRestaurant with its unique ID From firebase, and the name of the restaurant.
      *
@@ -20,11 +29,27 @@ public class FBRestaurant implements Restaurant {
      * @param name name of restaurant. Cannot be empty
      */
     public FBRestaurant(String UID, String name) {
-        this.UID = UID;
+        db = FirebaseDatabase.getInstance().getReference();
+        this.UID = db.child("restaurant").push().getKey();
         this.popularity = 0;
         this.description = "";
         this.rating = -1;
         this.name = name;
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/restaurant/" + UID, toMap());
+        db.updateChildren(childUpdates);
+    }
+
+    @Exclude
+    private Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", UID);
+        result.put("name", name);
+        result.put("description", description);
+        result.put("popularity", popularity);
+        result.put("rating", rating);
+        return result;
     }
 
     /**
