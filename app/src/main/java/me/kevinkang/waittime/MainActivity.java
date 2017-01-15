@@ -7,11 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import me.kevinkang.waittime.firebase.FBRestaurant;
 import me.kevinkang.waittime.model.RecyclerAdapter;
+import me.kevinkang.waittime.model.Restaurant;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,18 +29,35 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    // Row Layout stuff
+    private TextView name;
+    private TextView time;
 
-    String[] restaurant = {"McDonalds","Wendys","Burger King", "Dairy Queen", "Dicks"};
+
+    Restaurant[] restaurant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        name = (TextView) findViewById(R.id.tx_restaurant_name);
+        time = (TextView) findViewById(R.id.tx_restaurant_time);
+
+        new FBRestaurant("hi");
+        new FBRestaurant("hey");
+        new FBRestaurant("ho");
+        new FBRestaurant("ht");
+        new FBRestaurant("hr");
+
         recyclerView = (RecyclerView)findViewById(R.id.wT_recycler_view);
-        adapter = new RecyclerAdapter(restaurant);
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("restaurants");
+        adapter = new RecyclerAdapter(this, db);
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {

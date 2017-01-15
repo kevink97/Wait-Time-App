@@ -4,7 +4,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import me.kevinkang.waittime.model.User;
 
@@ -49,13 +48,6 @@ public class FBUser implements User {
             db.child("users").child(UID).child("max-time").setValue(this.maxWaitTime);
         }
 
-    }
-
-    public FBUser retrieveUser(String UID) {
-        if (db.child("users").child(UID) == null) return null;
-        FBUser user = new FBUser(UID);
-        Query query = db.child("users").child(UID)
-        return new FBUser(UID);
     }
 
     /**

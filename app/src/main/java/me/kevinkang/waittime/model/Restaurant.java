@@ -7,12 +7,6 @@ package me.kevinkang.waittime.model;
 public interface Restaurant {
 
     /**
-     * gets UID of Restaurant
-     * @return UID of restaurants
-     */
-    String getUID();
-
-    /**
      * gets name of Restaurant
      * @return name of restaurants
      */
@@ -54,5 +48,9 @@ public interface Restaurant {
      * @return rating for restaurant
      */
     double getRating();
+
+    void setTime(int newTime);
+
+    int getTime();
 
 }
