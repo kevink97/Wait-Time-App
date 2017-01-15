@@ -44,6 +44,20 @@
                 android:id="@+id/tvRati"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editText"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kek"
+                android:onClick="onCheckIn"/>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

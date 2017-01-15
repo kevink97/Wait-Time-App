@@ -2,6 +2,7 @@ package me.kevinkang.waittime.model;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,16 +43,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
                 FBRestaurant restaurant  = dataSnapshot.getValue(FBRestaurant.class);
+                restaurant.UID = key;
                 restaurantIds.add(dataSnapshot.getKey());
                 restaurants.add(restaurant);
                 notifyItemInserted(restaurants.size() - 1);
+                Log.e("RECYCLE", "data collecting : " + restaurant.getName());
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                FBRestaurant restaurant = dataSnapshot.getValue(FBRestaurant.class);
                 String rKey = dataSnapshot.getKey();
+                FBRestaurant restaurant = dataSnapshot.getValue(FBRestaurant.class);
+                restaurant.UID = rKey;
 
                 int rIndex = restaurantIds.indexOf(rKey);
                 if (rIndex > -1) {
@@ -77,6 +83,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         ref.addChildEventListener(childEventListener);
 
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("RECYCLE", "data should be all collected");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         mChildEventListener = childEventListener;
     }
 
@@ -89,14 +107,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        FBRestaurant restaurant = restaurants.get(position);
-        holder.name.setText(restaurant.getName());
-        holder.time.setText(restaurant.getTime() + "");
+        if (position < restaurants.size()) {
+
+            FBRestaurant restaurant = restaurants.get(position);
+            holder.name.setText(restaurant.getName());
+            holder.time.setText(restaurant.getTime() + " min");
+            Log.e("RECYCLE", "data should have been displayed");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        Log.e("RECYCLE", "fetching item count " + restaurants.size());
+        return 8;//restaurants.size();
     }
 
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder {

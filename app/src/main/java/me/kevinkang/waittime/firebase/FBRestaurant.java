@@ -17,7 +17,7 @@ import me.kevinkang.waittime.model.Restaurant;
  */
 
 public class FBRestaurant implements Restaurant, Parcelable {
-    private String UID;
+    public String UID;
     private int popularity;
     private String description;
     private double rating;

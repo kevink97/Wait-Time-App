@@ -48,11 +48,12 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    signIn();
+                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                    finish();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                    button.setVisibility(View.INVISIBLE);
+                    button.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -136,6 +137,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                                     Toast.LENGTH_SHORT).show();
                         }
                         startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                        finish();
 
                     }
                 });
