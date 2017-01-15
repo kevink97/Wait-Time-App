@@ -27,12 +27,12 @@ public class DetailActivity extends AppCompatActivity {
         tvDesc = (TextView) findViewById(R.id.tvDesc);
         tvPop = (TextView) findViewById(R.id.tvPop);
         tvTime = (TextView) findViewById(R.id.tvTime);
-        tvRat = (TextView) findViewById(R.id.tvRat);
+        tvRat = (TextView) findViewById(R.id.tvRati);
 
         tvName.setText(restaurant.getName());
         tvDesc.setText(restaurant.getDescription());
         tvPop.setText(restaurant.getPopularity());
-        tvTime.setText(restaurant.getName());
+        tvTime.setText(restaurant.getTime());
         tvRat.setText(restaurant.getRating() + "");
     }
 }
