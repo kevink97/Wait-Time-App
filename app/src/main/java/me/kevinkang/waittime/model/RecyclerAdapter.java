@@ -119,7 +119,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public int getItemCount() {
         Log.e("RECYCLE", "fetching item count " + restaurants.size());
-        return 8;//restaurants.size();
+        return restaurants.size();
     }
 
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder {

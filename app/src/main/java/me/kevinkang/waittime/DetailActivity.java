@@ -7,12 +7,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import me.kevinkang.waittime.firebase.FBRestaurant;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private TextView tvName;
     private TextView tvDesc;
@@ -28,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         restaurant = getIntent().getParcelableExtra("rest");
 
@@ -44,6 +51,10 @@ public class DetailActivity extends AppCompatActivity {
         tvPop.setText(restaurant.getPopularity() + "");
         tvTime.setText(restaurant.getTime() + "");
         tvRat.setText(restaurant.getRating() + "");
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     public void onCheckIn(View view) {
@@ -56,5 +67,12 @@ public class DetailActivity extends AppCompatActivity {
             startActivity(new Intent(DetailActivity.this, MainActivity.class));
         }
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng mcDonalds = new LatLng(47.667637, -122.300355);
+        googleMap.addMarker(new MarkerOptions().position(mcDonalds).title("McDonalds"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mcDonalds, 19));
     }
 }
