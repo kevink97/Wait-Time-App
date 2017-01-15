@@ -23,6 +23,8 @@ public class FBRestaurant implements Restaurant, Parcelable {
     private double rating;
     private String name;
     private int time; // in minutes
+    private double longitude;
+    private double latitude;
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -32,6 +34,8 @@ public class FBRestaurant implements Restaurant, Parcelable {
         dest.writeDouble(rating);
         dest.writeString(name);
         dest.writeInt(time);
+        dest.writeDouble(longitude);
+        dest.writeDouble(latitude);
     }
 
     private FBRestaurant(Parcel in) {
@@ -41,6 +45,8 @@ public class FBRestaurant implements Restaurant, Parcelable {
         rating = in.readDouble();
         name = in.readString();
         time = in.readInt();
+        longitude = in.readDouble();
+        latitude = in.readDouble();
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -71,6 +77,8 @@ public class FBRestaurant implements Restaurant, Parcelable {
         this.rating = -1;
         this.name = name;
         this.time = 0;
+        this.latitude = 47.667637;
+        this.longitude = -122.300355;
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/restaurants/" + UID, toMap());
@@ -85,7 +93,22 @@ public class FBRestaurant implements Restaurant, Parcelable {
         result.put("popularity", popularity);
         result.put("rating", rating);
         result.put("time", time);
+        result.put("longitude", longitude);
+        result.put("latitude", latitude);
         return result;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setCoord(double longitude, double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     /**

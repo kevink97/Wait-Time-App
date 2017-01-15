@@ -11,51 +11,80 @@
     android:orientation="vertical"
     tools:context="me.kevinkang.waittime.DetailActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".50"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tvDesc"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="Description"
+                android:textStyle="bold"
+                android:textColor="@color/darkgray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvDesc"
+                android:textColor="@color/lightdarkgray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="Current Wait Time"
+                android:textStyle="bold"
+                android:textColor="@color/darkgray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="match_parent"
+                android:textColor="@color/lightdarkgray"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="Popularity"
+                android:textStyle="bold"
+                android:textColor="@color/darkgray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvPop"
+                android:layout_width="match_parent"
+                android:textColor="@color/lightdarkgray"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="Rating"
+                android:textStyle="bold"
+                android:textColor="@color/darkgray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvRati"
+                android:layout_width="match_parent"
+                android:textColor="@color/lightdarkgray"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tvPop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="How many minutes to get seated?"
+                android:ems="10"
+                android:id="@+id/editText"/>
 
-        <TextView
-            android:id="@+id/tvRati"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Check In"
+                android:onClick="onCheckIn"/>
+        </LinearLayout>
+    </ScrollView>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="How many minutes to get seated?"
-            android:ems="10"
-            android:id="@+id/editText"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Check In"
-            android:onClick="onCheckIn"/>
 
-    </LinearLayout>
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/map"
@@ -64,4 +93,5 @@
               android:layout_width="match_parent"
               android:layout_height="0dp"
               tools:context="me.kevinkang.waittime.DetailActivity" />
+
 </LinearLayout>

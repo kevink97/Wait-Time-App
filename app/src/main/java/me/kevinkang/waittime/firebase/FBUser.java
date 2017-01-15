@@ -48,6 +48,9 @@ public class FBUser implements User {
             db.child("users").child(UID).child("max-time").setValue(this.maxWaitTime);
         }
 
+
+
+
     }
 
     /**

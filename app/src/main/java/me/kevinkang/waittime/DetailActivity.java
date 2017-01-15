@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,10 +36,10 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         restaurant = getIntent().getParcelableExtra("rest");
+        getSupportActionBar().setTitle(restaurant.getName());
 
-        tvName = (TextView) findViewById(R.id.tvName);
         tvDesc = (TextView) findViewById(R.id.tvDesc);
         tvPop = (TextView) findViewById(R.id.tvPop);
         tvTime = (TextView) findViewById(R.id.tvTime);
@@ -46,7 +47,6 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
         et = (EditText) findViewById(R.id.editText);
 
-        tvName.setText(restaurant.getName());
         tvDesc.setText(restaurant.getDescription());
         tvPop.setText(restaurant.getPopularity() + "");
         tvTime.setText(restaurant.getTime() + "");
@@ -71,8 +71,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng mcDonalds = new LatLng(47.667637, -122.300355);
-        googleMap.addMarker(new MarkerOptions().position(mcDonalds).title("McDonalds"));
+        LatLng mcDonalds = new LatLng(restaurant.getLatitude(), restaurant.getLongitude());
+        googleMap.addMarker(new MarkerOptions().position(mcDonalds).title(restaurant.getName()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mcDonalds, 19));
     }
 }
