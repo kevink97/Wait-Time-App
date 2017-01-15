@@ -1,5 +1,8 @@
 package me.kevinkang.waittime.firebase;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
@@ -13,13 +16,43 @@ import me.kevinkang.waittime.model.Restaurant;
  * Created by kevink97 on 1/14/17.
  */
 
-public class FBRestaurant implements Restaurant {
+public class FBRestaurant implements Restaurant, Parcelable {
     private String UID;
     private int popularity;
     private String description;
     private double rating;
     private String name;
     private int time; // in minutes
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(UID);
+        dest.writeInt(popularity);
+        dest.writeString(description);
+        dest.writeDouble(rating);
+        dest.writeString(name);
+        dest.writeInt(time);
+    }
+
+    private FBRestaurant(Parcel in) {
+        UID = in.readString();
+        popularity = in.readInt();
+        description = in.readString();
+        rating = in.readDouble();
+        name = in.readString();
+        time = in.readInt();
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<FBRestaurant> CREATOR = new Parcelable.Creator<FBRestaurant>() {
+        public FBRestaurant createFromParcel(Parcel in) {
+            return new FBRestaurant(in);
+        }
+
+        public FBRestaurant[] newArray(int size) {
+            return new FBRestaurant[size];
+        }
+    };
 
     private DatabaseReference db;
 
@@ -137,4 +170,11 @@ public class FBRestaurant implements Restaurant {
     public int getTime() {
         return time;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
 }

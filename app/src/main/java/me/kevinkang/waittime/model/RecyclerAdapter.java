@@ -30,6 +30,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     private List<String> restaurantIds = new ArrayList<>();
     private List<FBRestaurant> restaurants = new ArrayList<>();
 
+    public List<FBRestaurant> getRestaurants() {
+        return restaurants;
+    }
+
     public RecyclerAdapter(final Context context, DatabaseReference ref) {
         mContext = context;
         db = ref;
@@ -75,10 +79,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         mChildEventListener = childEventListener;
     }
+
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_layout,parent,false);
-
         RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(view);
         return recyclerViewHolder;
     }
