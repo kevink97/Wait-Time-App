@@ -26,6 +26,7 @@
                 android:layout_width="0dp"
                 android:orientation="vertical"
                 android:layout_height="match_parent"
+                android:weightSum="5"
                 android:layout_weight="0.5">
                 <TextView
                     android:text="Description"
@@ -37,7 +38,7 @@
                     android:id="@+id/tvDesc"
                     android:textColor="@color/lightdarkgray"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -45,60 +46,46 @@
                 android:layout_weight="0.5"
                 android:weightSum="15"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="vertical"
-                    android:layout_weight="5">
                     <TextView
                         android:text="Current Wait Time"
                         android:textStyle="bold"
                         android:textColor="@color/darkgray"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="0dp"
+                        android:layout_weight="2"/>
 
                     <TextView
                         android:id="@+id/tvTime"
                         android:layout_width="match_parent"
                         android:textColor="@color/lightdarkgray"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="vertical"
-                    android:layout_weight="5">
+                        android:layout_height="0dp"
+                        android:layout_weight="3"/>
                     <TextView
                         android:text="Popularity"
                         android:textStyle="bold"
                         android:textColor="@color/darkgray"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="0dp"
+                        android:layout_weight="2"/>
                     <TextView
                         android:id="@+id/tvPop"
                         android:layout_width="match_parent"
                         android:textColor="@color/lightdarkgray"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="vertical"
-                    android:layout_weight="5">
+                        android:layout_height="0dp"
+                        android:layout_weight="3" />
                     <TextView
                         android:text="Rating"
                         android:textStyle="bold"
                         android:textColor="@color/darkgray"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="0dp"
+                        android:layout_weight="2" />
                     <TextView
                         android:id="@+id/tvRati"
                         android:layout_width="match_parent"
                         android:textColor="@color/lightdarkgray"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="3" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

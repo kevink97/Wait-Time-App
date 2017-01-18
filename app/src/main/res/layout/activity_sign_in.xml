@@ -11,8 +11,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="me.kevinkang.waittime.SignInActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="WaitTime"
+        android:textSize="10mm"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"/>
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content" />
 </RelativeLayout>
